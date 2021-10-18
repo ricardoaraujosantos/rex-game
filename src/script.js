@@ -1,3 +1,4 @@
+const background = document.querySelector('.background');
 const dinoRex = document.querySelector('.rex');
 let isJumping = false; //Boolean to fix bug jump over the jump
 
@@ -35,3 +36,27 @@ function jumper() {
 
     }, 20);
 };
+
+//function create cactus as a child div of the background div
+function createCactus() {
+    const cactus = document.createElement('div');
+    cactus.classList.add('cactus');
+    cactus.style.left = 1100 + 'px';
+    background.appendChild(cactus);
+
+    let cactusPosition = 1100;
+    let newCactus = Math.random() * 7000;
+
+    let leftCactusPosition = setInterval(() => {
+        if(cactusPosition < -100){
+            clearInterval(leftCactusPosition);
+            background.removeChild(cactus);
+        } else {
+            cactusPosition -= 10;
+            cactus.style.left = cactusPosition + 'px';
+            console.log(cactusPosition)
+        }
+    }, 20)
+    setTimeout(createCactus, newCactus);
+};
+createCactus();
