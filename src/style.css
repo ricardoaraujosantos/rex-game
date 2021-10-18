@@ -1,3 +1,22 @@
+.game-over {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: fantasy;
+    color: #f81010;
+    font-size: 100px;
+
+}
+
+.title-style{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: fantasy;
+    color: #1ba126;
+    font-size: 50px;
+}
+
 .rex{
     width: 100px;
     height: 100px;

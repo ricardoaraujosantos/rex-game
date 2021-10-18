@@ -1,6 +1,7 @@
 const background = document.querySelector('.background');
 const dinoRex = document.querySelector('.rex');
 let isJumping = false; //Boolean to fix bug jump over the jump
+let position = 0;
 
 document.addEventListener('keyup', handleKeyUp);
 
@@ -11,11 +12,10 @@ function handleKeyUp(e) {
 };
 
 function jumper() {
-    let position = 0;
     isJumping = true; //Boolean to fix bug jump over the jump
 
     let upPosition = setInterval(() => {
-        if(position >= 200){
+        if(position >= 350){
             clearInterval(upPosition); 
 
             let downPosition = setInterval(() => {
@@ -41,16 +41,21 @@ function jumper() {
 function createCactus() {
     const cactus = document.createElement('div');
     cactus.classList.add('cactus');
-    cactus.style.left = 1100 + 'px';
+    cactus.style.left = 1000 + 'px';
     background.appendChild(cactus);
 
-    let cactusPosition = 1100;
+    let cactusPosition = 1000;
     let newCactus = Math.random() * 7000;
 
     let leftCactusPosition = setInterval(() => {
         if(cactusPosition < -100){
             clearInterval(leftCactusPosition);
             background.removeChild(cactus);
+
+            //Game Over
+        } else if(cactusPosition > 0 && cactusPosition < 100 && position < 100){
+            clearInterval(leftCactusPosition);
+            document.body.innerHTML = `<h1 class='game-over'>Game over</h1>`;
         } else {
             cactusPosition -= 10;
             cactus.style.left = cactusPosition + 'px';
