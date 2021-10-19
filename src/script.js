@@ -23,13 +23,13 @@ function jumper() {
                     clearInterval(downPosition);
                     isJumping = false; //Boolean to fix bug jump over the jump
 
-                }else{
+                } else {
                     position -= 20;
                     dinoRex.style.bottom = position + 'px';
                 };
             });
 
-        }else{  
+        } else {  
             position += 20;
             dinoRex.style.bottom = position + 'px';
         };
@@ -45,23 +45,32 @@ function createCactus() {
     background.appendChild(cactus);
 
     let cactusPosition = 1000;
-    let newCactus = Math.random() * 7000;
+    let newCactus = Math.random() * 6000;
 
     let leftCactusPosition = setInterval(() => {
-        if(cactusPosition < -100){
+        if(cactusPosition < -60){
             clearInterval(leftCactusPosition);
             background.removeChild(cactus);
 
             //Game Over
-        } else if(cactusPosition > 0 && cactusPosition < 100 && position < 100){
+        } else if(cactusPosition > 0 && cactusPosition < 60 && position < 60){
             clearInterval(leftCactusPosition);
-            document.body.innerHTML = `<h1 class='game-over'>Game over</h1>`;
+            
+            document.body.innerHTML = `
+            <div class='game-over'>
+            <h1>Game over</h1>
+            <input class="reset" type="button" value= "Jogar" onclick = jogar()></input>
+           </div>
+            `;
         } else {
             cactusPosition -= 10;
             cactus.style.left = cactusPosition + 'px';
-            console.log(cactusPosition)
-        }
+        } 
     }, 20)
     setTimeout(createCactus, newCactus);
 };
 createCactus();
+
+function jogar(){
+    location.reload();
+};
