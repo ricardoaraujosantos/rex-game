@@ -1,5 +1,43 @@
-body{
-    background: #facf43;
+.background{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-image: url(../images/sonic-fundo.png);
+    background-size: cover;
+    bottom: 0;
+    animation: slideleft 50s infinite linear;
+}
+
+.background header{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    font-family: fantasy;
+    color: #ffd900;
+    font-size: 25px;
+}
+
+.background .logo-title{
+    margin: 40px 20px 0;
+    font-size: 34px;
+}
+
+.background .text-score{
+    margin: 0 20px;
+    font-size: 22px;
+}
+
+header .btnStart{
+    cursor: pointer;
+    width: 180px;
+    height: 60px;
+    border: none;
+    border-radius: 20px;
+    background-color: #1ba126;
+    font-family: fantasy;
+    font-size: 24px;
+    text-transform: uppercase;
 }
 
 .game-over {
@@ -10,62 +48,32 @@ body{
     font-family: fantasy;
     color: #f81010;
     font-size: 50px;
-
 }
 
-.title-style{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: fantasy;
-    color: #1ba126;
-    font-size: 50px;
-}
-
-.rex{
-    width: 60px;
-    height: 60px;
-   background-image: url(../images/dino.png);
+.sonic{
+    width: 120px;
+    height: 120px;
+    background-image: url(../images/sonic.gif);
+    background-size: cover;
     position: absolute;
-    bottom: 0;
+    bottom: 150px;
 }
 
-.cactus{
-    width: 60px;
-    height: 60px;
-   background-image: url(../images/cactus.png);
+.eggman{
+    width: 120px;
+    height: 120px;
+    background-image: url(../images/eggman.gif);
+    background-size: cover;
     position: absolute;
-    bottom: 0;
+    bottom: 150px;
 }
 
-@keyframes slideright{
+@keyframes slideleft{
     from {
-        background-position: 7000%;
+        background-position: 0;
     }
     
     to {
-        background-position: 0;
+        background-position: 7000%;
     }
-}
-
-.background{
-    position: absolute;
-    width: 100%;
-    height: 200px;
-    background-image: url(../images/background.png);
-    background-repeat: repeat-x;
-    bottom: 0;
-    animation: slideright 600s infinite linear;
-}
-.reset{
-    cursor: pointer;
-    width: 180px;
-    height: 60px;
-    border: none;
-    border-radius: 20px;
-    background-color: #1ba126;
-    font-family: fantasy;
-    font-size: 24px;
-    text-transform: uppercase;
-    align-items: center;
 }

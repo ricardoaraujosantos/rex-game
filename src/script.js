@@ -1,76 +1,111 @@
 const background = document.querySelector('.background');
-const dinoRex = document.querySelector('.rex');
+const dinoRex = document.querySelector('.sonic');
 let isJumping = false; //Boolean to fix bug jump over the jump
 let position = 0;
+let score = 0;
+let level = 0;
+let speed = 30;
+let stage = 1;
+let gameOver = false;
+
+
 
 document.addEventListener('keyup', handleKeyUp);
 
-function handleKeyUp(e) {
-    if(e.keyCode === 32) {
-        if(!isJumping) jumper();
+function start(){
+    if(jumper){
+  document.querySelector('.btnStart').style.display = 'none';
+ }
+}
+start();
+
+function handleKeyUp(event) {
+    if(event.keyCode === 32) {
+        if(!isJumping) {
+            jumper();
+        };
     };
 };
 
+
+
 function jumper() {
+
     isJumping = true; //Boolean to fix bug jump over the jump
 
     let upPosition = setInterval(() => {
-        if(position >= 350){
+        if(position >= 460){
             clearInterval(upPosition); 
 
             let downPosition = setInterval(() => {
-                if(position <= 0){
+                if(position <= 150){
                     clearInterval(downPosition);
                     isJumping = false; //Boolean to fix bug jump over the jump
 
                 } else {
-                    position -= 20;
+                    position -= 8;
                     dinoRex.style.bottom = position + 'px';
                 };
             });
 
         } else {  
-            position += 20;
+            position += 150;
             dinoRex.style.bottom = position + 'px';
         };
 
     }, 20);
 };
 
-//function create cactus as a child div of the background div
-function createCactus() {
-    const cactus = document.createElement('div');
-    cactus.classList.add('cactus');
-    cactus.style.left = 1000 + 'px';
-    background.appendChild(cactus);
+//function create cactus updates score and nivel
+function createEggmanScore() {
+    let eggman = document.createElement('div');
+    eggman.classList.add('eggman');
+    eggman.style.left = 1400 + 'px';
+    background.appendChild(eggman);
 
-    let cactusPosition = 1000;
+    let eggmanPosition = 1400;
     let newCactus = Math.random() * 6000;
+    
 
-    let leftCactusPosition = setInterval(() => {
-        if(cactusPosition < -60){
-            clearInterval(leftCactusPosition);
-            background.removeChild(cactus);
+    let leftEggmanPosition = setInterval(() => {
+
+        if(speed % 2 !== 0 && eggmanPosition === 1400){
+            document.querySelector('.cactus').style.backgroundImage = "url('./images/eggman-furadeira.gif')";
+        }
+
+        if(eggmanPosition < -120){
+            //level += 1;
+           // speed -= 1;
+            score += 10;
+
+            let myScore = document.querySelector('.valueScore');
+            myScore.innerHTML = score;
+
+            //Remove the cactus when exit the screen
+            clearInterval(leftEggmanPosition);
+            background.removeChild(eggman);
 
             //Game Over
-        } else if(cactusPosition > 0 && cactusPosition < 60 && position < 60){
-            clearInterval(leftCactusPosition);
-            
+        } else if(eggmanPosition > 0 && eggmanPosition < 120 && position < 150){
+            clearInterval(leftEggmanPosition);
+            gameOver = true;
             document.body.innerHTML = `
-            <div class='game-over'>
-            <h1>Game over</h1>
-            <input class="reset" type="button" value= "Jogar" onclick = jogar()></input>
-           </div>
+            <header class='game-over'>
+                <h1>Game over</h1>
+                <p>Pontuação total = ${score} Pts</p>
+                <input class="btnStart" type="button" value= "Jogar" onclick = playGame()></input>
+           </header>
             `;
+            
         } else {
-            cactusPosition -= 10;
-            cactus.style.left = cactusPosition + 'px';
+            eggmanPosition -= 10;
+            eggman.style.left = eggmanPosition + 'px';
         } 
-    }, 20)
-    setTimeout(createCactus, newCactus);
+    }, speed)
+    setTimeout(createEggmanScore, newCactus);
 };
-createCactus();
+createEggmanScore();
 
-function jogar(){
+function playGame(){
     location.reload();
 };
