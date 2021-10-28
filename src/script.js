@@ -1,5 +1,7 @@
 const background = document.querySelector('.background');
 const dinoRex = document.querySelector('.sonic');
+
+
 let isJumping = false; //Boolean to fix bug jump over the jump
 let position = 0;
 let score = 0;
@@ -35,10 +37,12 @@ function jumper() {
 
     let upPosition = setInterval(() => {
         if(position >= 460){
+            document.querySelector('.sonic').style.backgroundImage = "url('./images/spinner.gif')";
             clearInterval(upPosition); 
 
             let downPosition = setInterval(() => {
                 if(position <= 150){
+                    document.querySelector('.sonic').style.backgroundImage = "url('./images/sonic.gif')";
                     clearInterval(downPosition);
                     isJumping = false; //Boolean to fix bug jump over the jump
 
@@ -46,14 +50,14 @@ function jumper() {
                     position -= 8;
                     dinoRex.style.bottom = position + 'px';
                 };
-            });
+            }, 10);
 
         } else {  
             position += 150;
             dinoRex.style.bottom = position + 'px';
         };
 
-    }, 20);
+    });
 };
 
 //function create cactus updates score and nivel
@@ -70,12 +74,12 @@ function createEggmanScore() {
     let leftEggmanPosition = setInterval(() => {
 
         if(speed % 2 !== 0 && eggmanPosition === 1400){
-            document.querySelector('.cactus').style.backgroundImage = "url('./images/eggman-furadeira.gif')";
+            document.querySelector('.eggman').style.backgroundImage = "url('./images/eggman-furadeira.gif')";
         }
 
         if(eggmanPosition < -120){
-            //level += 1;
-           // speed -= 1;
+            level += 1;
+            speed -= 1;
             score += 10;
 
             let myScore = document.querySelector('.valueScore');
@@ -86,7 +90,7 @@ function createEggmanScore() {
             background.removeChild(eggman);
 
             //Game Over
-        } else if(eggmanPosition > 0 && eggmanPosition < 120 && position < 150){
+        } else if(eggmanPosition > 0 && eggmanPosition < 120 && position < 160){
             clearInterval(leftEggmanPosition);
             gameOver = true;
             document.body.innerHTML = `
