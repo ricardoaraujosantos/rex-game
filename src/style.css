@@ -34,7 +34,8 @@ header .btnStart{
     height: 60px;
     border: none;
     border-radius: 20px;
-    background-color: #1ba126;
+    background-color: #1304e2;
+    color: #fff;
     font-family: fantasy;
     font-size: 24px;
     text-transform: uppercase;
@@ -45,9 +46,19 @@ header .btnStart{
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-image: url(../images/sonic-fundo.png);
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+    margin-bottom: 0;
     font-family: fantasy;
-    color: #f81010;
-    font-size: 50px;
+    color: #ffff;
+    font-size: 30px;
+}
+
+.game-over h1{
+    margin-bottom: 0;
+    text-transform: uppercase;
 }
 
 .sonic{

@@ -92,7 +92,7 @@ function createEggmanScore() {
             document.body.innerHTML = `
             <header class='game-over'>
                 <h1>Game over</h1>
-                <p>Pontuação total = ${score} Pts</p>
+                <p>Pontuação = ${score} Pts</p>
                 <input class="btnStart" type="button" value= "Jogar" onclick = playGame()></input>
            </header>
             `;
